@@ -1,2 +1,2 @@
 # template-for-future-project
-just a template for future idea
+LOCUS: hub for you and your friends
