@@ -11,12 +11,22 @@
 </head>
 
 
-
 <body id="body">
     <main id="block1">
+        <div class="toast bg-dark" id="homepageToast">
+            <div class="toast-body"></div>
+        </div>
         <div id="nameDpDisplayDiv">
             <img class="mb-2" id="dpDisplay" src="./assets/testProfile.jpg">
-            <h5 id="nameDisplay">Username <span id="dropDownArrow">⬇️</span></h5>
+            <h5 id="nameDisplay"></h5>
+
+            <div class="dropdown show mx-3" id="profileInfoDropdown">
+                <button class="btn btn-sm btn-info dropdown-toggle" id="dropdownMenuButton" onclick="dropdownToggle()"></button>
+                <div class="dropdown-menu bg-primary" id="dropdown" aria-labelledby="dropdownMenuButton" style="display: none;">
+                    <a class="dropdown-item bg-primary" id="idDropdown" onclick="copyId(this)"></a>
+                    <a class="dropdown-item bg-info" id="signDrop" onclick="signout()">Signout</a>
+                </div>
+            </div>
         </div>
 
         <div class="d-flex align-items-center h-100" id="contentHomePage">
@@ -63,7 +73,7 @@
             </div>
             </span>
         </div>
-    </main>>
+    </main>
 
     <main id="block2">
         <div class="toast bg-dark" id="loginToast">
