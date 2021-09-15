@@ -7,7 +7,8 @@
     <link href="global.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
-    <title>Site</title>
+      <link rel="icon" href="./assets/favicon.jpg">
+    <title>Locus</title>
 </head>
 
 
@@ -115,7 +116,7 @@
 
     <div class="d-flex align-items-center justify-content-center h-100" id="mainContent">
       <div id="loginDivInner">
-        <form id="formLogin">
+        <form onkeydown="return event.key != 'Enter';" id="formLogin">
           <div class="form-row align-items-center">
             <div class="col-auto">
               <label class="sr-only" for="inlineFormInput">Id</label>
@@ -124,16 +125,20 @@
 
             <div class="col-auto">
               <div class="form-check mb-2">
-                <input class="form-check-input" type="checkbox" id="checkBoxRemember">
+                <input class="form-check-input" type="checkbox" id="checkRemember">
                 <label class="form-check-label" for="autoSizingCheck">Remember Me</label><br>
-                <label class="form-check-label mt-2" for="autoSizingCheck" id="createNew"><u>New Account?</u></label>
+                <label class="form-check-label mt-2" for="autoSizingCheck" id="createNew" onclick="signup()"><u>New Account?</u></label>
               </div>
             </div>
           </div>
         </form>
       </div>
-      <button class="ml-2" type="submit"  id="loginSubmit" onclick="login()">Login</button>
+      <button class="ml-2" type="button" id="loginSubmit" form="formLogin" onsubmit="return false" onclick="login()">Login</button>
     </div>
+  </main>
+
+  <main id="block3">
+
   </main>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"
