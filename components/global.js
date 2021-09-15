@@ -7,7 +7,7 @@ window.onload = () => {
         loginWindow.style.display = "block"
         homeWindow.style.display = "none"
     } else {
-        document.getElementById('nameDisplay').innerHTML = JSON.parse(fromLS(fromLS('id') || fromSS('id')))['name']
+        document.getElementById('nameDisplay').innerHTML = `${JSON.parse(fromLS(fromLS('id') || fromSS('id')))['name']}`
         loginWindow.style.display = "none"
         homeWindow.style.display = "block"
     }
@@ -18,6 +18,18 @@ function checkIt() {
         document.getElementById('checkRemember').checked = true
     } else {
         document.getElementById('checkRemember').checked = false
+    }
+}
+
+function dropdownToggle() {
+    if (document.getElementById('dropdown').style.display == "none") {
+        document.getElementById('dropdown').style.display = "block"
+        document.getElementById('idDropdown').innerHTML = `<b>Id:</b> ${fromLS('id') || fromSS('id')}`
+        return
+    }
+    if (document.getElementById('dropdown').style.display == "block") {
+        document.getElementById('dropdown').style.display = "none"
+        return
     }
 }
 
@@ -48,7 +60,7 @@ function login() {
         toSS('id', document.getElementById('userIdLogin').value)
     }
 
-    document.getElementById('nameDisplay').innerHTML = JSON.parse(fromLS(userId.value))['name']
+    document.getElementById('nameDisplay').innerHTML = `${JSON.parse(fromLS(userId.value))['name']}`
     loginWindow.style.display = "none"
     homeWindow.style.display = "block"
 }
@@ -88,7 +100,7 @@ function signup() {
     }
 
     let displayName = username.value
-    document.getElementById('nameDisplay').innerHTML = displayName
+    document.getElementById('nameDisplay').innerHTML = `${displayName}`
     signupWindow.style.display = "none"
     homeWindow.style.display = "block"
 }
@@ -103,6 +115,36 @@ function uuidGenerated() {
     document.getElementById('uuidInputField').value = generatedUuid
     document.getElementById('createNewId').style.display = "none"
     document.getElementById('alreadyAccount').style.fontSize = "normal"
+}
+
+function copyId(element) {
+    let range, selection, worked;
+
+    if (document.body.createTextRange) {
+        range = document.body.createTextRange();
+        range.moveToElementText(element);
+        range.select();
+    } else if (window.getSelection) {
+        selection = window.getSelection();
+        range = document.createRange();
+        range.selectNodeContents(element);
+        selection.removeAllRanges();
+        selection.addRange(range);
+    }
+
+    document.execCommand('copy');
+    toggleToast('homepageToast', '⠀Copied!', 1500);
+}
+
+function signout() {
+    if (fromLS('id') === null) {
+        sessionStorage.removeItem('id');
+        location.reload()
+        return
+    } else {
+        localStorage.removeItem('id');
+        location.reload()
+    }
 }
 
 
@@ -134,7 +176,7 @@ function toggleToast(elementId, text, time) {
 
 function uuid() {
     min = Math.ceil(1000);
-    max = Math.floor(999999999);
+    max = Math.floor(99999);
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
