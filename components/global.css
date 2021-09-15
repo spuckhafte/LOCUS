@@ -4,20 +4,22 @@ body {
 }
 
 #block1 {
-  display: none;
-}
-#block2 {
-  display: block;
-  padding: 150px;
-}
-#block3 {
-  display: none;
+    display: none;
 }
 
+#block2 {
+    display: block;
+    padding: 150px;
+}
+
+#block3 {
+    display: none;
+    padding: 150px;
+}
 
 #mainContent {
-    background-color: rgb(0,0,0);
-    background-color: rgba(0,0,0, 0.6);
+    background-color: rgb(0, 0, 0);
+    background-color: rgba(0, 0, 0, 0.6);
     z-index: 2;
 }
 
@@ -32,15 +34,14 @@ body {
     font-weight: bold;
     text-transform: uppercase;
     transition: all 0.3s ease-in-out;
-  }
-  
-  .glow-button:hover {
+}
+
+.glow-button:hover {
     color: rgb(6, 0, 95);
     box-shadow: 0 0px 15px 15px #398b8b;
     background-color: #00a8f3;
     font-size: large;
-  }
-
+}
 
 #friendsList {
     color: wheat;
@@ -51,127 +52,271 @@ body {
     overflow-y: auto;
     overflow-x: hidden;
 }
+
 #friends {
     border-radius: 0px;
     width: 490px;
     font-weight: bold;
 }
+
 #friendsTopic {
     font-weight: bold;
     cursor: default;
     color: #00a8f3;
 }
+
 #friendsTable {
-  color: rgb(111, 102, 231);
-  font-weight: bold;
+    color: rgb(111, 102, 231);
+    font-weight: bold;
 }
+
 tr {
-  transition: 0.1s ease-in-out;
-  height: 20px;
+    transition: 0.1s ease-in-out;
+    height: 20px;
 }
+
 tr:hover {
-  color:#00a8f3;
-  background-color: #000000b7;
-  cursor: pointer;
+    color: #00a8f3;
+    background-color: #000000b7;
+    cursor: pointer;
 }
+
 #friendsSno:hover {
-  font-weight: bolder;
+    font-weight: bolder;
 }
+
 #friendsDpDisplay {
-  border: 3px solid #3548cc;
-  border-radius: 20px;
-  width: 40px;
-  height: 40px;
-  position: relative;
-  bottom: 4px;
+    border: 3px solid #3548cc;
+    border-radius: 20px;
+    width: 40px;
+    height: 40px;
+    position: relative;
+    bottom: 4px;
 }
 
 
 /*Scroll Bar edit*/
+
 ::-webkit-scrollbar {
     width: 10px;
-  }
-  ::-webkit-scrollbar-track {
-    box-shadow: inset 0 0 5px grey; 
+}
+
+ ::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px grey;
     border-radius: 10px;
-  }
-  ::-webkit-scrollbar-thumb {
-    background: rgba(84, 74, 228, 0.466); 
+}
+
+ ::-webkit-scrollbar-thumb {
+    background: rgba(84, 74, 228, 0.466);
     border-radius: 10px;
-  }
+}
 
 #siteName {
-  position: relative;
-  bottom: 40px;
-  cursor: default;
-  font-size: 60px;
-  text-align: center;
-  background-image: linear-gradient(45deg, #3548cc, rgb(111, 102, 231) );
-  background-size: 100%;
-  background-repeat: repeat;
-  background-clip: border-box;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-
-  -webkit-user-select: none;
-  -webkit-touch-callout: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
+    position: relative;
+    bottom: 40px;
+    cursor: default;
+    font-size: 60px;
+    text-align: center;
+    background-image: linear-gradient(45deg, #3548cc, rgb(111, 102, 231));
+    background-size: 100%;
+    background-repeat: repeat;
+    background-clip: border-box;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -webkit-user-select: none;
+    -webkit-touch-callout: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 
 #nameDpDisplayDiv {
-  padding: 10px;
+    padding: 10px;
 }
+
 #nameDisplay {
-  color: rgb(111, 102, 231);
-  font-weight: 400;
-  position: relative;
-  left: 2px;
-  cursor: default;
+    color: rgb(111, 102, 231);
+    font-weight: 400;
+    position: relative;
+    left: 2px;
+    cursor: default;
 }
+
 #dpDisplay {
-  border: 3px solid #3548cc;
-  border-radius: 25px;
-  width: 45px;
-  height: 45px;
+    border: 3px solid #3548cc;
+    border-radius: 25px;
+    width: 45px;
+    height: 45px;
+    -webkit-user-select: none;
+    -webkit-touch-callout: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
-#nameDisplay, #dpDisplay {
-  display: inline;
+
+#dropDownArrow {
+    transition: 0.1s ease-in-out;
+    border: 0px;
+    font-size: larger;
+}
+
+#dropDownArrow:hover {
+    font-size: 30px;
+    cursor: pointer;
+}
+
+#nameDisplay,
+#dpDisplay {
+    display: inline;
 }
 
 #formLogin {
-  color: rgb(111, 102, 231);
-  font-weight: bold;
-  font-size: large;
-  width: 300px;
+    color: rgb(111, 102, 231);
+    font-weight: bold;
+    font-size: large;
+    width: 300px;
+    -webkit-user-select: none;
+    -webkit-touch-callout: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
+
 #loginSubmit {
-  position: relative;
-  bottom: 25px;
-  cursor: pointer;
-  text-decoration: none;
-  color: rgb(48, 45, 100);
-  background-color:#3548cc;
-  padding: 15px 40px;
-  border-radius: 4px;
-  font-weight: bold;
-  text-transform: uppercase;
-  transition: all 0.3s ease-in-out;
-  border: 0px;
+    position: relative;
+    bottom: 25px;
+    cursor: pointer;
+    text-decoration: none;
+    color: rgb(48, 45, 100);
+    background-color: #3548cc;
+    padding: 15px 40px;
+    border-radius: 4px;
+    font-weight: bold;
+    text-transform: uppercase;
+    transition: all 0.3s ease-in-out;
+    border: 0px;
+    -webkit-user-select: none;
+    -webkit-touch-callout: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
+
 #loginSubmit:hover {
-  color: #00a8f3;
+    color: #00a8f3;
 }
-#checkBoxRemember{
-  cursor: pointer;
+
+#checkRemember {
+    cursor: pointer;
 }
+
+#textRememberMe {
+    transition: 0.2s ease-in-out;
+}
+
+#textRememberMe:hover {
+    color: rgb(135, 127, 247);
+    cursor: pointer;
+}
+
 #createNew {
-  color: #00a8f3;
-  cursor: pointer;
-  font-weight: normal;
-  font-size: medium;
+    color: #00a8f3;
+    cursor: pointer;
+    font-weight: normal;
+    font-size: medium;
+    transition: 0.2s ease-in-out;
 }
+
+#createNew:hover {
+    color: #53c2f5;
+}
+
 #loginDivInner {
-  padding: 50px;
+    padding: 50px;
+}
+
+#loginToast {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    color: #00a8f3;
+    font-weight: normal;
+    transition: all 0.3s ease-in-out;
+    font-size: larger;
+    -webkit-user-select: none;
+    -webkit-touch-callout: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+#formSignup {
+    color: rgb(111, 102, 231);
+    font-weight: bold;
+    font-size: large;
+    width: 300px;
+    -webkit-user-select: none;
+    -webkit-touch-callout: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+#signupSubmit {
+    position: relative;
+    bottom: 65px;
+    cursor: pointer;
+    text-decoration: none;
+    color: rgb(48, 45, 100);
+    background-color: #3548cc;
+    padding: 15px 40px;
+    border-radius: 4px;
+    font-weight: bold;
+    text-transform: uppercase;
+    transition: all 0.3s ease-in-out;
+    border: 0px;
+    -webkit-user-select: none;
+    -webkit-touch-callout: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+#signupSubmit:hover {
+    color: #00a8f3;
+}
+
+#createNewId {
+    color: #00a8f3;
+    cursor: pointer;
+    font-weight: normal;
+    font-size: medium;
+    transition: 0.2s ease-in-out;
+}
+
+#createNewId:hover {
+    color: #53c2f5;
+}
+
+#alreadyAccount {
+    transition: 0.1s ease-in-out;
+}
+
+#alreadyAccount:hover {
+    color: gray;
+}
+
+#signupToast {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    color: #00a8f3;
+    font-weight: normal;
+    transition: all 0.3s ease-in-out;
+    font-size: larger;
+    -webkit-user-select: none;
+    -webkit-touch-callout: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
