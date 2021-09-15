@@ -1,0 +1,17 @@
+{
+  "name": "components",
+  "version": "1.0.0",
+  "description": "",
+  "main": "global.js",
+  "dependencies": {
+    "require": "^2.4.20",
+    "short-uuid": "^4.2.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
