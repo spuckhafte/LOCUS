@@ -10,6 +10,9 @@ body {
   display: block;
   padding: 150px;
 }
+#block3 {
+  display: none;
+}
 
 
 #mainContent {
