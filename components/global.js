@@ -174,10 +174,22 @@ function toggleToast(elementId, text, time) {
     return
 }
 
-function uuid() {
-    min = Math.ceil(1000);
-    max = Math.floor(99999);
+function randInt(minimum, maximum) {
+    min = Math.ceil(minimum);
+    max = Math.floor(maximum);
     return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+function uuid() {
+    let uuidArray = []
+    i=0
+    while (i<4) {
+        let index = randInt(0, 9)
+        uuidArray.push(index)
+        i++
+    }
+    let finalUuid = uuidArray.join('')
+    return finalUuid
 }
 
 function uuidManagement() {
@@ -189,7 +201,7 @@ function uuidManagement() {
     let Uuid = uuid()
     let lsUuidArray = fromLS('uuids').split(',')
     while (true) {
-        if (lsUuidArray.includes(Uuid.toString())) {
+        if (lsUuidArray.includes(Uuid)) {
             Uuid = uuid()
             continue
         } else {
