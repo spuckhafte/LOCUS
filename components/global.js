@@ -1,6 +1,9 @@
 const homeWindow = document.getElementById('block1')
 const loginWindow = document.getElementById('block2')
 const signupWindow = document.getElementById('block3')
+const loadWindow = document.getElementById('block4')
+
+// {'friends': [['name', 'id', 'status']]}
 
 window.onload = () => {
     if (fromLS('id') === null && fromSS('id') === null) {
@@ -10,6 +13,32 @@ window.onload = () => {
         document.getElementById('nameDisplay').innerHTML = `${JSON.parse(fromLS(fromLS('id') || fromSS('id')))['name']}`
         loginWindow.style.display = "none"
         homeWindow.style.display = "block"
+
+        if ("friends" in (JSON.parse(fromLS(fromLS('id') || fromSS('id'))))) {
+            const friendsList = JSON.parse(fromLS(fromLS('id') || fromSS('id')))['friends']
+            for (let i in friendsList) {
+                let friend = friendsList[i]
+
+                const friendsDetailPage = document.getElementById('friendsDetails')
+
+                let friendTable = document.createElement('table')
+                friendTable.setAttribute('class', 'table')
+                friendTable.setAttribute('id', 'friendsTable')
+
+                const friendDetails = `
+                    <tbody>
+                        <tr>
+                            <th scope="row"><img id="friendsDpDisplay"></th>
+                            <td>${friend[0]}</td>
+                            <td>${friend[1]}</td>
+                            <td>${friend[2]}</td>
+                        </tr>
+                    </tbody>
+                `
+                friendTable.innerHTML = friendDetails
+                friendsDetailPage.appendChild(friendTable)
+            }
+        }
     }
 }
 
@@ -35,8 +64,7 @@ function dropdownToggle() {
 
 function checkItSignup() {
     if (!document.getElementById('checkRememberSignup').checked) {
-        document.getElementById('checkRememberSignup').chec
-        ked = true
+        document.getElementById('checkRememberSignup').checked = true
     } else {
         document.getElementById('checkRememberSignup').checked = false
     }
@@ -60,16 +88,49 @@ function login() {
         toSS('id', document.getElementById('userIdLogin').value)
     }
 
-    document.getElementById('nameDisplay').innerHTML = `${JSON.parse(fromLS(userId.value))['name']}`
-    loginWindow.style.display = "none"
-    homeWindow.style.display = "block"
+    loginWindow.style.display = "none";
+    loadWindow.style.display = "block"
+    document.getElementById('loader').style.display = "block"
+
+    setTimeout(function() {
+        document.getElementById('nameDisplay').innerHTML = `${JSON.parse(fromLS(userId.value))['name']}`
+        loadWindow.style.display = "none"
+        document.getElementById('loader').style.display = "none"
+        homeWindow.style.display = "block"
+
+        if ("friends" in (JSON.parse(fromLS(fromLS('id') || fromSS('id'))))) {
+            const friendsList = JSON.parse(fromLS(fromLS('id') || fromSS('id')))['friends']
+            for (let i in friendsList) {
+                let friend = friendsList[i]
+
+                const friendsDetailPage = document.getElementById('friendsDetails')
+
+                let friendTable = document.createElement('table')
+                friendTable.setAttribute('class', 'table')
+                friendTable.setAttribute('id', 'friendsTable')
+
+                const friendDetails = `
+                    <tbody>
+                        <tr>
+                            <th scope="row"><img id="friendsDpDisplay"></th>
+                            <td>${friend[0]}</td>
+                            <td>${friend[1]}</td>
+                            <td>${friend[2]}</td>
+                        </tr>
+                    </tbody>
+                `
+                friendTable.innerHTML = friendDetails
+                friendsDetailPage.appendChild(friendTable)
+            }
+        }
+    }, 1500);
 }
 
 function signup() {
     let username = document.getElementById('usernameInputField')
     let uniqueId = document.getElementById('uuidInputField')
 
-    if (username.value.split('').length < 4 || !isNaN(username.value)) {
+    if (username.value.split('').length < 4 || isNaS(username.value)) {
         toggleToast('signupToast', '❗ Invalid Name', 2000)
         return
     }
@@ -82,9 +143,9 @@ function signup() {
     if (fromLS('uuids') === null) {
         toLS('uuids', [uniqueId.value])
     } else {
-        let lsArray = fromLS('uuids').split(',')
-        lsArray.push(uniqueId.value)
-        toLS('uuids', lsArray)
+        let lsArrayUuids = fromLS('uuids').split(',')
+        lsArrayUuids.push(uniqueId.value)
+        toLS('uuids', lsArrayUuids)
     }
 
     const UserInformation = {
@@ -99,10 +160,16 @@ function signup() {
         toSS('id', uniqueId.value)
     }
 
-    let displayName = username.value
-    document.getElementById('nameDisplay').innerHTML = `${displayName}`
-    signupWindow.style.display = "none"
-    homeWindow.style.display = "block"
+    signupWindow.style.display = "none";
+    loadWindow.style.display = "block"
+    document.getElementById('loader').style.display = "block"
+
+    setTimeout(function() {
+        let displayName = username.value
+        document.getElementById('nameDisplay').innerHTML = `${displayName}`
+        signupWindow.style.display = "none"
+        homeWindow.style.display = "block"
+    }, 1500);
 }
 
 function register() {
@@ -147,8 +214,87 @@ function signout() {
     }
 }
 
+function showAddFriend() {
+    document.getElementById('addFriendModal').style.display = 'block'
+}
+
+function cancelAddFriend() {
+    document.getElementById('addFriendModal').style.display = 'none'
+    document.getElementById('friendId').value = ""
+}
+
+function addFriendEvent() {
+    let friendId = document.getElementById('friendId')
+    if (friendId.value.split('').length < 4 || isNaN(friendId.value)) {
+        toggleToast('homepageToast', '❗ Invalid Id', 2000)
+        return
+    } else if (fromLS(friendId.value) == null) {
+        toggleToast('homepageToast', '❗ User doesn\'t exist', 2000)
+        return
+    } else if (friendId.value == fromLS('id') || friendId.value == fromSS('id')) {
+        toggleToast('homepageToast', "⠀You can't add yourself as your friend", 3000)
+        return
+    } else {
+        let userIEmyDetails = JSON.parse(fromLS(fromLS('id') || fromSS('id')))
+        if (userIEmyDetails['friends'] !== null) {
+            userIEmyDetails = userIEmyDetails['friends']
+            for (let i in userIEmyDetails) {
+                if (userIEmyDetails[i][1] == friendId.value) {
+                    toggleToast('homepageToast', "❗ You both are already friends", 2000)
+                    return
+                }
+            }
+        }
+    }
+
+    let nameOfFriend = JSON.parse(fromLS(friendId.value))['name']
+    let id = friendId.value
+
+    const friendInfo = [
+        [nameOfFriend, id, 'status']
+    ]
+
+    let myDetails = JSON.parse(fromLS(fromLS('id') || fromSS('id')))
+    const myInfoForFriend = [
+        [myDetails['name'], myDetails['uuid'], 'status']
+    ]
+
+    if (!("friends" in myDetails)) {
+        myDetails['friends'] = friendInfo
+        myDetails = JSON.stringify(myDetails)
+        toLS(fromLS('id') || fromSS('id'), myDetails)
+
+        let temporaryFriendDetail = JSON.parse(fromLS(friendId.value))
+        if (!("friends" in (JSON.parse(fromLS(friendId.value))))) {
+            temporaryFriendDetail['friends'] = myInfoForFriend
+            temporaryFriendDetail = JSON.stringify(temporaryFriendDetail)
+            toLS(friendId.value, temporaryFriendDetail)
+        } else {
+            temporaryFriendDetail['friends'].push(myInfoForFriend[0])
+            temporaryFriendDetail = JSON.stringify(temporaryFriendDetail)
+            toLS(friendId.value, temporaryFriendDetail)
+        }
+    } else {
+        myDetails['friends'].push(friendInfo[0])
+        myDetails = JSON.stringify(myDetails)
+        toLS(fromLS('id') || fromSS('id'), myDetails)
+
+        let temporaryFriendDetail = JSON.parse(fromLS(friendId.value))
+        if (!("friends" in (JSON.parse(fromLS(friendId.value))))) {
+            temporaryFriendDetail['friends'] = myInfoForFriend
+            temporaryFriendDetail = JSON.stringify(temporaryFriendDetail)
+            toLS(friendId.value, temporaryFriendDetail)
+        } else {
+            temporaryFriendDetail['friends'].push(myInfoForFriend[0])
+            temporaryFriendDetail = JSON.stringify(temporaryFriendDetail)
+            toLS(friendId.value, temporaryFriendDetail)
+        }
+    }
+    location.reload()
+}
 
 // usefull functions
+
 function toLS(key, value) {
     localStorage.setItem(key, value)
 }
@@ -182,8 +328,8 @@ function randInt(minimum, maximum) {
 
 function uuid() {
     let uuidArray = []
-    i=0
-    while (i<4) {
+    i = 0
+    while (i < 4) {
         let index = randInt(0, 9)
         uuidArray.push(index)
         i++
@@ -209,6 +355,16 @@ function uuidManagement() {
             return Uuid
         }
     }
+}
+
+function isNaS(string) {
+    string = string.split('')
+    for (let i in string) {
+        if (!isNaN(string[i])) {
+            return true
+        }
+    }
+    false
 }
 
 function loginStyleWindow() {
