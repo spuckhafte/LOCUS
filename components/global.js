@@ -168,6 +168,8 @@ function signup() {
         let displayName = username.value
         document.getElementById('nameDisplay').innerHTML = `${displayName}`
         signupWindow.style.display = "none"
+        loadWindow.style.display = "none"
+        document.getElementById('loader').style.display = "none"
         homeWindow.style.display = "block"
     }, 1500);
 }
